@@ -17,7 +17,6 @@ const slides = [
 	}
 ]
 
-
 // Sélectionner l'élément HTML flèche gauche
 const left = document.querySelector('.arrow_left');
 
@@ -26,16 +25,23 @@ const right = document.querySelector('.arrow_right');
 
 // Ajouter un écouteur d'événement 'click' à la flèche gauche
 left.addEventListener('click', () => {
- console.log('clic GAUCHE');
+  currentImg--;
+  console.log('currentImg vaut : ' + currentImg);
+  updateBanner();
+  toggleSelected();
 })
 
 // Ajouter un écouteur d'événement 'click' à la flèche droite
 right.addEventListener('click', () => {
-  console.log('clic DROIT');
+   currentImg++;
+    console.log('currentImg vaut : ' + currentImg);
+  updateBanner();
+  toggleSelected();
 })
 
 //récuperer le nbre d'élément(nbr img) dans le tableau slides
 let slidesElementsNb = slides.length;
+
 
 function createDotElement () {
   //selectionne la div.dots qui contiendra les points div.dot
@@ -50,13 +56,11 @@ function createDotElement () {
     dots.appendChild(dot);
   }
 }
-
 //appel de la fonction pour créer les points
 createDotElement();
 
 // Index de la diapositive affichée (0 = première image du tableau slides).
 let currentImg = 0;
-
 
 function toggleSelected () {
   // Récupère tous les enfants (les points) de la div.dots
@@ -72,6 +76,26 @@ function toggleSelected () {
       : dots[i].classList.remove("dot_selected");
   }
 }
-
 // Appel initial pour afficher le point sélectionné au chargement de la page
 toggleSelected();
+
+// Sélectionner l'img de la bannière, sur laquelle on va modifier l'url, le src
+const bannerImg = document.querySelector('.banner-img');
+
+// Sélectionner l'élément HTML p de la bannière (le paragraphe de texte)
+const bannerText = document.querySelector('#banner p');
+
+//permet de mettre à jour l'image et le texte de la bannière
+function updateBanner () {
+  bannerImg.src = `./assets/images/slideshow/${slides[currentImg].image}`;
+  bannerText.innerHTML = slides[currentImg].tagLine;
+}
+
+
+
+
+
+
+
+
+
