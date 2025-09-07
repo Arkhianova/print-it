@@ -26,7 +26,10 @@ const right = document.querySelector('.arrow_right');
 // Ajouter un écouteur d'événement 'click' à la flèche gauche
 left.addEventListener('click', () => {
   currentImg--;
-  console.log('currentImg vaut : ' + currentImg);
+  // Si on est avant la première image, on revient à la dernière
+  if (currentImg < 0) {
+    currentImg = slidesElementsNb - 1; // aller à la fin
+  }
   updateBanner();
   toggleSelected();
 })
@@ -34,7 +37,10 @@ left.addEventListener('click', () => {
 // Ajouter un écouteur d'événement 'click' à la flèche droite
 right.addEventListener('click', () => {
    currentImg++;
-    console.log('currentImg vaut : ' + currentImg);
+  // Si on est après la dernière image, on revient à la première
+    if (currentImg == slidesElementsNb) {
+    currentImg = 0; // retour au début
+  }
   updateBanner();
   toggleSelected();
 })
